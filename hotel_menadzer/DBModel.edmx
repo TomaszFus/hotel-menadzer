@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="klienci">
+          <Key>
+            <PropertyRef Name="id_klienta" />
+          </Key>
+          <Property Name="id_klienta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefon" Type="int" Nullable="false" />
+          <Property Name="nr_dowodu" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pokoje">
+          <Key>
+            <PropertyRef Name="nr_pokoju" />
+          </Key>
+          <Property Name="nr_pokoju" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="liczba_osob" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cena" Type="money" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pracownicy">
+          <Key>
+            <PropertyRef Name="id_pracownika" />
+          </Key>
+          <Property Name="id_pracownika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="haslo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rezerwacje">
+          <Key>
+            <PropertyRef Name="id_rezerwacji" />
+          </Key>
+          <Property Name="id_rezerwacji" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="od" Type="date" Nullable="false" />
+          <Property Name="do" Type="date" Nullable="false" />
+          <Property Name="nr_pokoju" Type="int" Nullable="false" />
+          <Property Name="id_klienta" Type="int" Nullable="false" />
+          <Property Name="rodzaj_platnosci" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="koszt" Type="money" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_rezerwacje_klienci">
+          <End Role="klienci" Type="Self.klienci" Multiplicity="1" />
+          <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klienci">
+              <PropertyRef Name="id_klienta" />
+            </Principal>
+            <Dependent Role="rezerwacje">
+              <PropertyRef Name="id_klienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rezerwacje_pokoje">
+          <End Role="pokoje" Type="Self.pokoje" Multiplicity="1" />
+          <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pokoje">
+              <PropertyRef Name="nr_pokoju" />
+            </Principal>
+            <Dependent Role="rezerwacje">
+              <PropertyRef Name="nr_pokoju" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelModelStoreContainer">
+          <EntitySet Name="klienci" EntityType="Self.klienci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pokoje" EntityType="Self.pokoje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pracownicy" EntityType="Self.pracownicy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rezerwacje" EntityType="Self.rezerwacje" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_rezerwacje_klienci" Association="Self.FK_rezerwacje_klienci">
+            <End Role="klienci" EntitySet="klienci" />
+            <End Role="rezerwacje" EntitySet="rezerwacje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rezerwacje_pokoje" Association="Self.FK_rezerwacje_pokoje">
+            <End Role="pokoje" EntitySet="pokoje" />
+            <End Role="rezerwacje" EntitySet="rezerwacje" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="klienci">
+          <Key>
+            <PropertyRef Name="id_klienta" />
+          </Key>
+          <Property Name="id_klienta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefon" Type="Int32" Nullable="false" />
+          <Property Name="nr_dowodu" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="rezerwacje" Relationship="Self.FK_rezerwacje_klienci" FromRole="klienci" ToRole="rezerwacje" />
+        </EntityType>
+        <EntityType Name="pokoje">
+          <Key>
+            <PropertyRef Name="nr_pokoju" />
+          </Key>
+          <Property Name="nr_pokoju" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="liczba_osob" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cena" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="rezerwacje" Relationship="Self.FK_rezerwacje_pokoje" FromRole="pokoje" ToRole="rezerwacje" />
+        </EntityType>
+        <EntityType Name="pracownicy">
+          <Key>
+            <PropertyRef Name="id_pracownika" />
+          </Key>
+          <Property Name="id_pracownika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="haslo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rezerwacje">
+          <Key>
+            <PropertyRef Name="id_rezerwacji" />
+          </Key>
+          <Property Name="id_rezerwacji" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="od" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="do" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="nr_pokoju" Type="Int32" Nullable="false" />
+          <Property Name="id_klienta" Type="Int32" Nullable="false" />
+          <Property Name="rodzaj_platnosci" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="koszt" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="klienci" Relationship="Self.FK_rezerwacje_klienci" FromRole="rezerwacje" ToRole="klienci" />
+          <NavigationProperty Name="pokoje" Relationship="Self.FK_rezerwacje_pokoje" FromRole="rezerwacje" ToRole="pokoje" />
+        </EntityType>
+        <Association Name="FK_rezerwacje_klienci">
+          <End Role="klienci" Type="Self.klienci" Multiplicity="1" />
+          <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="klienci">
+              <PropertyRef Name="id_klienta" />
+            </Principal>
+            <Dependent Role="rezerwacje">
+              <PropertyRef Name="id_klienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rezerwacje_pokoje">
+          <End Role="pokoje" Type="Self.pokoje" Multiplicity="1" />
+          <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pokoje">
+              <PropertyRef Name="nr_pokoju" />
+            </Principal>
+            <Dependent Role="rezerwacje">
+              <PropertyRef Name="nr_pokoju" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="klienci" EntityType="Self.klienci" />
+          <EntitySet Name="pokoje" EntityType="Self.pokoje" />
+          <EntitySet Name="pracownicy" EntityType="Self.pracownicy" />
+          <EntitySet Name="rezerwacje" EntityType="Self.rezerwacje" />
+          <AssociationSet Name="FK_rezerwacje_klienci" Association="Self.FK_rezerwacje_klienci">
+            <End Role="klienci" EntitySet="klienci" />
+            <End Role="rezerwacje" EntitySet="rezerwacje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rezerwacje_pokoje" Association="Self.FK_rezerwacje_pokoje">
+            <End Role="pokoje" EntitySet="pokoje" />
+            <End Role="rezerwacje" EntitySet="rezerwacje" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HotelModelStoreContainer" CdmEntityContainer="HotelEntities">
+          <EntitySetMapping Name="klienci">
+            <EntityTypeMapping TypeName="HotelModel.klienci">
+              <MappingFragment StoreEntitySet="klienci">
+                <ScalarProperty Name="id_klienta" ColumnName="id_klienta" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="nr_dowodu" ColumnName="nr_dowodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pokoje">
+            <EntityTypeMapping TypeName="HotelModel.pokoje">
+              <MappingFragment StoreEntitySet="pokoje">
+                <ScalarProperty Name="nr_pokoju" ColumnName="nr_pokoju" />
+                <ScalarProperty Name="liczba_osob" ColumnName="liczba_osob" />
+                <ScalarProperty Name="cena" ColumnName="cena" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pracownicy">
+            <EntityTypeMapping TypeName="HotelModel.pracownicy">
+              <MappingFragment StoreEntitySet="pracownicy">
+                <ScalarProperty Name="id_pracownika" ColumnName="id_pracownika" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="haslo" ColumnName="haslo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rezerwacje">
+            <EntityTypeMapping TypeName="HotelModel.rezerwacje">
+              <MappingFragment StoreEntitySet="rezerwacje">
+                <ScalarProperty Name="id_rezerwacji" ColumnName="id_rezerwacji" />
+                <ScalarProperty Name="od" ColumnName="od" />
+                <ScalarProperty Name="do" ColumnName="do" />
+                <ScalarProperty Name="nr_pokoju" ColumnName="nr_pokoju" />
+                <ScalarProperty Name="id_klienta" ColumnName="id_klienta" />
+                <ScalarProperty Name="rodzaj_platnosci" ColumnName="rodzaj_platnosci" />
+                <ScalarProperty Name="koszt" ColumnName="koszt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

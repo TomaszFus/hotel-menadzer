@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="klienci">
+    <Key>
+      <PropertyRef Name="id_klienta" />
+    </Key>
+    <Property Name="id_klienta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="imie" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nazwisko" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="telefon" Type="int" Nullable="false" />
+    <Property Name="nr_dowodu" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pokoje">
+    <Key>
+      <PropertyRef Name="nr_pokoju" />
+    </Key>
+    <Property Name="nr_pokoju" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="liczba_osob" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="cena" Type="money" Nullable="false" />
+    <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pracownicy">
+    <Key>
+      <PropertyRef Name="id_pracownika" />
+    </Key>
+    <Property Name="id_pracownika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="imie" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="nazwisko" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="haslo" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rezerwacje">
+    <Key>
+      <PropertyRef Name="id_rezerwacji" />
+    </Key>
+    <Property Name="id_rezerwacji" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="od" Type="date" Nullable="false" />
+    <Property Name="do" Type="date" Nullable="false" />
+    <Property Name="nr_pokoju" Type="int" Nullable="false" />
+    <Property Name="id_klienta" Type="int" Nullable="false" />
+    <Property Name="rodzaj_platnosci" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="koszt" Type="money" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_rezerwacje_klienci">
+    <End Role="klienci" Type="Self.klienci" Multiplicity="1" />
+    <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="klienci">
+        <PropertyRef Name="id_klienta" />
+      </Principal>
+      <Dependent Role="rezerwacje">
+        <PropertyRef Name="id_klienta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_rezerwacje_pokoje">
+    <End Role="pokoje" Type="Self.pokoje" Multiplicity="1" />
+    <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pokoje">
+        <PropertyRef Name="nr_pokoju" />
+      </Principal>
+      <Dependent Role="rezerwacje">
+        <PropertyRef Name="nr_pokoju" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HotelModelStoreContainer">
+    <EntitySet Name="klienci" EntityType="Self.klienci" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pokoje" EntityType="Self.pokoje" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pracownicy" EntityType="Self.pracownicy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rezerwacje" EntityType="Self.rezerwacje" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_rezerwacje_klienci" Association="Self.FK_rezerwacje_klienci">
+      <End Role="klienci" EntitySet="klienci" />
+      <End Role="rezerwacje" EntitySet="rezerwacje" />
+    </AssociationSet>
+    <AssociationSet Name="FK_rezerwacje_pokoje" Association="Self.FK_rezerwacje_pokoje">
+      <End Role="pokoje" EntitySet="pokoje" />
+      <End Role="rezerwacje" EntitySet="rezerwacje" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

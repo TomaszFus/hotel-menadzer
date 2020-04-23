@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HotelModelStoreContainer" CdmEntityContainer="HotelEntities">
+    <EntitySetMapping Name="klienci">
+      <EntityTypeMapping TypeName="HotelModel.klienci">
+        <MappingFragment StoreEntitySet="klienci">
+          <ScalarProperty Name="id_klienta" ColumnName="id_klienta" />
+          <ScalarProperty Name="imie" ColumnName="imie" />
+          <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+          <ScalarProperty Name="telefon" ColumnName="telefon" />
+          <ScalarProperty Name="nr_dowodu" ColumnName="nr_dowodu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pokoje">
+      <EntityTypeMapping TypeName="HotelModel.pokoje">
+        <MappingFragment StoreEntitySet="pokoje">
+          <ScalarProperty Name="nr_pokoju" ColumnName="nr_pokoju" />
+          <ScalarProperty Name="liczba_osob" ColumnName="liczba_osob" />
+          <ScalarProperty Name="cena" ColumnName="cena" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pracownicy">
+      <EntityTypeMapping TypeName="HotelModel.pracownicy">
+        <MappingFragment StoreEntitySet="pracownicy">
+          <ScalarProperty Name="id_pracownika" ColumnName="id_pracownika" />
+          <ScalarProperty Name="imie" ColumnName="imie" />
+          <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="haslo" ColumnName="haslo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="rezerwacje">
+      <EntityTypeMapping TypeName="HotelModel.rezerwacje">
+        <MappingFragment StoreEntitySet="rezerwacje">
+          <ScalarProperty Name="id_rezerwacji" ColumnName="id_rezerwacji" />
+          <ScalarProperty Name="od" ColumnName="od" />
+          <ScalarProperty Name="do" ColumnName="do" />
+          <ScalarProperty Name="nr_pokoju" ColumnName="nr_pokoju" />
+          <ScalarProperty Name="id_klienta" ColumnName="id_klienta" />
+          <ScalarProperty Name="rodzaj_platnosci" ColumnName="rodzaj_platnosci" />
+          <ScalarProperty Name="koszt" ColumnName="koszt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

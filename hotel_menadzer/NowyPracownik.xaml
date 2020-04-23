@@ -1,0 +1,52 @@
+﻿<Window x:Class="hotel_menadzer.NowyPracownik"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hotel_menadzer"
+        mc:Ignorable="d"
+        Title="NowyPracownik" Height="418.733" Width="945.53">
+    <Grid>
+
+        <Label Content="Tworzenie Konta Pracownika" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0"/>
+        <Label Content="Imię" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,100,0,0"/>
+        <Label Name="LbImieBlad" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,123,0,0" Height="27" Width="120" FontSize="11" Foreground="Red" Visibility="Collapsed"/>
+        <Label Content="Nazwisko" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,150,0,0"/>
+        <Label Name="LbNazwiskoBlad" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="210,173,0,0" Width="120" Foreground="Red" FontSize="11" Visibility="Collapsed"/>
+        <Label Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,200,0,0"/>
+
+        <TextBox Name="TxB_ImiePr" HorizontalAlignment="Left" Height="23" Margin="210,100,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120" LostFocus="TxB_ImiePr_LostFocus"/>
+        <TextBox Name="TxB_NazwiskoPr" HorizontalAlignment="Left" Height="23" Margin="210,150,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120" LostFocus="TxB_NazwiskoPr_LostFocus" />
+        <TextBox Name="TxB_Login" HorizontalAlignment="Left" Height="23" Margin="210,200,0,0" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True" IsEnabled="False"/>
+
+
+
+
+
+        <Label Content="Kod pracodawcy" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,100,0,0"/>
+        <Label Name="LbKodBlad" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="610,124,0,0" Width="120" FontSize="11" Foreground="Red" Visibility="Collapsed"/>
+        <Label Content="Hasło" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,150,0,0"/>
+        <Label Name="LbHasloBlad" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="610,173,0,0" Width="180" FontSize="11" Foreground="Red" Visibility="Hidden"/>
+        <Label Content="Powtórz hasło" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="500,200,0,0"/>
+        <Label Name="LbHasloPowBlad" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="610,223,0,0" Width="200" FontSize="11" Foreground="Red" Visibility="Collapsed"/>
+
+        <PasswordBox Name="PassB_Kod" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="120" Margin="610,100,0,0"/>
+        <PasswordBox Name="PassB_Haslo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="120" Margin="610,150,0,0"/>
+        <PasswordBox Name="PassB_PowHaslo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="23" Width="120" Margin="610,200,0,0"/>
+
+
+
+        <Button Name="Bt_Utworz" Content="Utwórz" HorizontalAlignment="Center" Margin="0,300,100,0" VerticalAlignment="Top" Width="75" Click="Bt_Utworz_Click"/>
+        <Button Name="Bt_Anuluj" Content="Anuluj" HorizontalAlignment="Center" Margin="100,300,0,0" VerticalAlignment="Top" Width="75" Click="Bt_Anuluj_Click"/>
+        
+        
+
+
+
+
+
+
+
+
+    </Grid>
+</Window>
