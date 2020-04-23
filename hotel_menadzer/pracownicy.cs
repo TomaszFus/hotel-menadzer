@@ -26,7 +26,9 @@ namespace hotel_menadzer
 
 
 
-
+        /// <summary>
+        /// Funkcja towrz¹ca login u¿ytkownika, poprzez po³¹czenie pierwszej litery iminia i nazwiska
+        /// </summary>
         public void Login()
         {
             login = imie.Substring(0, 1).ToLower() + nazwisko.ToLower();

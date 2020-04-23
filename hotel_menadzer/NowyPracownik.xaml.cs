@@ -47,8 +47,8 @@ namespace hotel_menadzer
         {
             if (String.IsNullOrWhiteSpace(TxB_ImiePr.Text))
             {
-                LbImieBlad.Visibility = Visibility.Visible;
                 LbImieBlad.Content = "Padaj imie";
+                LbImieBlad.Visibility = Visibility.Visible;
                 SprImie = false;
 
             }
@@ -65,9 +65,8 @@ namespace hotel_menadzer
         private void TxB_NazwiskoPr_LostFocus(object sender, RoutedEventArgs e)
         {
             if (String.IsNullOrWhiteSpace(TxB_NazwiskoPr.Text))
-            {
+            {   LbNazwiskoBlad.Content = "Podaj nazwisko";
                 LbNazwiskoBlad.Visibility = Visibility.Visible;
-                LbNazwiskoBlad.Content = "Podaj nazwisko";
                 SprNazw = false;
             }
             else
