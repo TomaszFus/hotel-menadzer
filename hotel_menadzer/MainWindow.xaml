@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hotel_menadzer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792">
             <TabItem Header="Rejestracja klienta">
@@ -15,16 +15,21 @@
                     <Label Content="Telefon" HorizontalAlignment="Left" Margin="29,138,0,0" VerticalAlignment="Top"/>
                     <Label Content="Nr. dowodu osobistego" HorizontalAlignment="Left" Margin="29,188,0,0" VerticalAlignment="Top"/>
                     <Label Content="Początek pobytu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,245,0,0"/>
+                    <Label Content="Koniec pobytu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,295,0,0"/>
+                    
+                    
+                    
                     <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="188,38,0,0"/>
                     <TextBox HorizontalAlignment="Left" Height="23" Margin="188,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <TextBox HorizontalAlignment="Left" Height="23" Margin="188,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <TextBox HorizontalAlignment="Left" Height="23" Margin="188,188,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="TxB_DzienOd" HorizontalAlignment="Left" Height="23" Margin="188,245,0,0" TextWrapping="Wrap" Text="{Binding ElementName=Kalendarz_1, Path=SelectedDate, StringFormat=d, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-                    
-                    
-                    <Button Content="K" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="322,245,0,0" Height="23" Click="Button_Click"/>
-                    <Calendar Name="Kalendarz_1" SelectionMode="SingleDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="407,135,0,0" Visibility="Collapsed"/>
+                    <TextBox Name="TxB_DzienOd" HorizontalAlignment="Left" Height="23" Margin="188,245,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="{Binding ElementName=Kalendarz_1, Path=SelectedDate, StringFormat=d, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Name="TxB_DzienDo" HorizontalAlignment="Left" Height="23" Margin="188,295,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="{Binding ElementName=Kalendarz_2, Path=SelectedDate, StringFormat=d, UpdateSourceTrigger=PropertyChanged}"/>
 
+                    <Button Name="Bt_Kalendarz" Content="K" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="321,245,0,0" Height="23" Click="Bt_Kalendarz_Click"/>
+                    <Button Name="Bt_Kalendarz_2" Content="K" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="321,295,0,0" Height="23" Click="Bt_Kalendarz_2_Click"/>
+                    <Calendar Name="Kalendarz_1" SelectionMode="SingleDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="353,103,0,0" Visibility="Collapsed"  SelectedDatesChanged="Kalendarz_1_SelectedDatesChanged"  />
+                    <Calendar Name="Kalendarz_2" SelectionMode="SingleDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="353,103,0,0" Visibility="Collapsed"  SelectedDatesChanged="Kalendarz_2_SelectedDatesChanged"  />
 
 
 
@@ -32,9 +37,13 @@
             </TabItem>
             <TabItem Header="Pokoje">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="371" Width="766">
-
-
+                    <DataGrid Name="DataGridP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="371" Width="267" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding nr_pokoju}" Header="Nr pokoju"/>
+                            <DataGridTextColumn Binding="{Binding liczba_osob}" Header="Liczba osób"/>
+                            <DataGridTextColumn Binding="{Binding cena}" Header="Cena"/>
+                            <DataGridTextColumn Binding="{Binding status}" Header="Status"/>
+                        </DataGrid.Columns>
                     </DataGrid>
 
 
@@ -42,6 +51,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <Label Name="LbZaPr" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="559,-2,0,0" Width="223"/>
 
     </Grid>
 </Window>

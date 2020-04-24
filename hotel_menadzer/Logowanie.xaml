@@ -7,15 +7,16 @@
         mc:Ignorable="d"
         Title="Logowanie" 
         Height="450" Width="350">
+        
     <Grid>
               
         
         
         <Label Content="Logowanie do systemu"  HorizontalAlignment="Center" Margin="0,50,0,0"  VerticalAlignment="Top"/>
         <Label Content="Login"  HorizontalAlignment="Left" Margin="50,100,0,0"  VerticalAlignment="Top"/>
-        <Label Name="LbLoginBlad" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,123,0,0" Width="120" Foreground="Red" FontSize="11" Visibility="Collapsed"/>
+        <Label Name="LbLoginBlad" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,123,0,0" Width="120" Foreground="Red" FontSize="11" Visibility="Hidden"/>
         <Label Content="Hasło"  HorizontalAlignment="Left" Margin="50,150,0,0"  VerticalAlignment="Top"/>
-        <Label Name="LbHaloBlad" Content="Label" HorizontalAlignment="Left" Margin="172,173,0,0" VerticalAlignment="Top" Width="120" Foreground="Red" FontSize="11" Visibility="Collapsed"/>
+        <Label Name="LbHaloBlad" Content="Label" HorizontalAlignment="Left" Margin="172,173,0,0" VerticalAlignment="Top" Width="120" Foreground="Red" FontSize="11" Visibility="Hidden"/>
         
         <TextBox Name="TxB_Login" HorizontalAlignment="Right" Height="23" TextWrapping="NoWrap" Text="" VerticalAlignment="Top" Width="120" Margin="0,100,50,0"/>
         <PasswordBox Name="PassB_Haslo" HorizontalAlignment="Right" Margin="0,150,50,0" VerticalAlignment="Top" Width="120" Height="23"/>        

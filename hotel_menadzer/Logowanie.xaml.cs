@@ -24,13 +24,16 @@ namespace hotel_menadzer
             InitializeComponent();
         }
 
-        pracownicy O_Pracownik = new pracownicy(); //obiekt klasy pracownicy
+        
 
         private void Bt_NPr_Click(object sender, RoutedEventArgs e)
         {
             NowyPracownik Win_NPr = new NowyPracownik();
             Win_NPr.ShowDialog();       //ShowDialog blokuje pierwsze okno
         }
+
+
+        
 
         
 
@@ -41,13 +44,23 @@ namespace hotel_menadzer
 
             using (HotelEntities db=new HotelEntities())
             {
-                if(db.Database.SqlQuery<string>("Select login from pracownicy where login='" + TxB_Login.Text + "'").FirstOrDefault()==TxB_Login.Text)
+
+                pracownicy pracownik = new pracownicy();
+
+                pracownik = db.pracownicy.FirstOrDefault(p => p.login == TxB_Login.Text);
+                if (pracownik is null)
                 {
-                    LbLoginBlad.Visibility = Visibility.Collapsed;
-                    if(db.Database.SqlQuery<string>("Select haslo from pracownicy where login='" + TxB_Login.Text + "'").FirstOrDefault() == PassB_Haslo.Password)
+                    LbLoginBlad.Content = "Błędny login";
+                    LbLoginBlad.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    LbLoginBlad.Visibility = Visibility.Hidden;
+                    if (pracownik.haslo==PassB_Haslo.Password)
                     {
-                        LbHaloBlad.Visibility = Visibility.Collapsed;
-                        MessageBox.Show("Zalogowano");
+                        LbHaloBlad.Visibility = Visibility.Hidden;
+                        MessageBox.Show("Zalogowano poprawnie");
+                        
                         MainWindow mainWindow = new MainWindow();
                         mainWindow.Show();
                         Close();
@@ -56,29 +69,46 @@ namespace hotel_menadzer
                     {
                         LbHaloBlad.Content = "Błędne hasło";
                         LbHaloBlad.Visibility = Visibility.Visible;
-                            
-
                     }
                 }
-                else
-                {
-                    LbLoginBlad.Content = "Podany login jest błędny lub nie istnieje";
-                    LbLoginBlad.Visibility = Visibility.Visible;
-                }
-                //db.Database.SqlQuery<string>("Select login from pracownicy where login='"+TxB_Login.Text+"'").FirstOrDefault();
+                
+               
+
+               
+
                 
 
 
+                //if (db.database.sqlquery<string>("select login from pracownicy where login='" + txb_login.text + "'").firstordefault() == txb_login.text)
+                //{
+                //    lbloginblad.visibility = visibility.collapsed;
+                //    if (db.database.sqlquery<string>("select haslo from pracownicy where login='" + txb_login.text + "'").firstordefault() == passb_haslo.password)
+                //    {
+                //        lbhaloblad.visibility = visibility.collapsed;
+                //        messagebox.show("zalogowano");
+                //        mainwindow mainwindow = new mainwindow();
+                //        mainwindow.show();
+                //        close();
+                //    }
+                //    else
+                //    {
+                //        lbhaloblad.content = "błędne hasło";
+                //        lbhaloblad.visibility = visibility.visible;
 
 
+                //    }
+                //}
+                //else
+                //{
+                //    lbloginblad.content = "podany login jest błędny lub nie istnieje";
+                //    lbloginblad.visibility = visibility.visible;
+                //}
 
-                //var dataset = from b in db.pracownicy where b.login.StartsWith("a") select b;
-
-                //var dane = db.pracownicy.Where(b => b.login == "adab").FirstOrDefault();
-               // TxB_Login.Text = dane.ToString();
                 
+
+
             }
-            //MessageBox.Show(pracownik_test);
+            
         }
     }
 }

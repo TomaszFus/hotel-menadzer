@@ -34,6 +34,8 @@ namespace hotel_menadzer
             login = imie.Substring(0, 1).ToLower() + nazwisko.ToLower();
         }
 
+      
+
 
 
 
