@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:hotel_menadzer"
         mc:Ignorable="d"
         Title="Logowanie" 
+        WindowStartupLocation="CenterScreen"
         Height="450" Width="350">
         
     <Grid>

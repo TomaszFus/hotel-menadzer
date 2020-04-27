@@ -25,10 +25,28 @@ namespace hotel_menadzer
         public MainWindow()
         {
             InitializeComponent();
+            //Bind();
             
         }
 
+        DateTime poczatek;
+        DateTime koniec;
+        TimeSpan lDni; //różnica miedzy dwoma datami
 
+
+        //combobox
+        //public List <pokoje> prop_pokoje { get; set; }
+
+        //private void Bind()
+        //{
+        //    HotelEntities db = new HotelEntities();
+        //    var item = db.pokoje.ToList();
+        //    prop_pokoje = item;
+        //    DataContext = prop_pokoje;
+        //}
+
+
+        
 
 
         private void Kalendarz_1_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
@@ -43,6 +61,7 @@ namespace hotel_menadzer
                 DateTime date = calendar.SelectedDate.Value;
                 TxB_DzienOd.Text = date.ToString();
                 Kalendarz_1.Visibility = Visibility.Collapsed;
+                poczatek = date;
             }
         }
 
@@ -58,8 +77,14 @@ namespace hotel_menadzer
                 DateTime date = calendar.SelectedDate.Value;
                 TxB_DzienDo.Text = date.ToString();
                 Kalendarz_2.Visibility = Visibility.Collapsed;
+                koniec = date;
+                lDni = koniec - poczatek;
+                TxB_LiczbaDni.Text = lDni.Days.ToString();  //róznica miedzy dwoma datami tylko dni
             }
         }
+
+
+        
 
 
 
@@ -88,5 +113,7 @@ namespace hotel_menadzer
                 DataGridP.ItemsSource = db.pokoje.ToList();
             }
         }
+
+        
     }
 }
