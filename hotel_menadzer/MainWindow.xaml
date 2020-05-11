@@ -16,24 +16,43 @@
                     <Label Content="Nr. dowodu osobistego" HorizontalAlignment="Left" Margin="29,188,0,0" VerticalAlignment="Top"/>
                     <Label Content="Początek pobytu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,245,0,0"/>
                     <Label Content="Koniec pobytu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,295,0,0"/>
+                    <Label Name="Lb_DataDoBlad" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="188,318,0,0" Width="120" FontSize="11" Foreground="Red" Visibility="Collapsed"/>
                     <Label Content="Liczba dni" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,345,0,0"/>
                     <Label Content="Liczba osób" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,38,0,0"/>
                     <Label Content="Pokój" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,88,0,0"/>
-                    
+                    <Label Content="Koszt" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,138,0,0"/>
+                    <Label Content="Rodzaj płatności" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,188,0,0"/>
+
                     <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="188,38,0,0"/>
                     <TextBox HorizontalAlignment="Left" Height="23" Margin="188,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <TextBox HorizontalAlignment="Left" Height="23" Margin="188,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <TextBox HorizontalAlignment="Left" Height="23" Margin="188,188,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <TextBox Name="TxB_DzienOd" HorizontalAlignment="Left" Height="23" Margin="188,245,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="{Binding ElementName=Kalendarz_1, Path=SelectedDate, StringFormat=d, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox Name="TxB_DzienDo" HorizontalAlignment="Left" Height="23" Margin="188,295,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="{Binding ElementName=Kalendarz_2, Path=SelectedDate, StringFormat=d, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Name="TxB_DzienOd" HorizontalAlignment="Left" Height="23" Margin="188,245,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="{Binding ElementName=Kalendarz_1, Path=SelectedDate, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Name="TxB_DzienDo" HorizontalAlignment="Left" Height="23" Margin="188,295,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="{Binding ElementName=Kalendarz_2, Path=SelectedDate, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox Name="TxB_LiczbaDni" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="188,345,0,0" IsReadOnly="True"/>
-                    
+
                     <Button Name="Bt_Kalendarz" Content="K" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="321,245,0,0" Height="23" Click="Bt_Kalendarz_Click"/>
                     <Button Name="Bt_Kalendarz_2" Content="K" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="321,295,0,0" Height="23" Click="Bt_Kalendarz_2_Click"/>
                     <Calendar Name="Kalendarz_1" SelectionMode="SingleDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="353,103,0,0" Visibility="Collapsed"  SelectedDatesChanged="Kalendarz_1_SelectedDatesChanged"  />
                     <Calendar Name="Kalendarz_2" SelectionMode="SingleDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="353,103,0,0" Visibility="Collapsed"  SelectedDatesChanged="Kalendarz_2_SelectedDatesChanged"  />
-                    <ComboBox   HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="591,88,0,0">
-                    </ComboBox>
+                    <ComboBox Name="ComBox_LiczbaOs" ItemsSource="{Binding pokoje}" DisplayMemberPath="liczba_osob" SelectedValuePath="liczba_osob"   HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="591,38,0,0" RenderTransformOrigin="0.32,0.399" SelectionChanged="ComBox_LiczbaOs_SelectionChanged_1"/>
+                    <ComboBox Name="ComBox_Pokoj" ItemsSource="{Binding pokoje}" DisplayMemberPath="nr_pokoju" SelectedValuePath="nr_pokoju" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="591,88,0,0" SelectionChanged="ComBox_Pokoj_SelectionChanged"/>
+                    <TextBox Name="TxB_Koszt" HorizontalAlignment="Left" Height="23" Margin="591,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <RadioButton Name="RB_Gotowka" Content="Gotówka" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="591,194,0,0" Checked="RB_Gotowka_Checked"/>
+                    <RadioButton Name="RB_Karta" Content="Karta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="591,222,0,0" Checked="RB_Karta_Checked"/>
+                    
+                    <TextBox Name="texttest" HorizontalAlignment="Left" Height="23" Margin="332,191,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <Button Content="Zatwierdź" HorizontalAlignment="Left" Margin="555,303,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Wyczyść" HorizontalAlignment="Left" Margin="555,354,0,0" VerticalAlignment="Top" Width="75"/>
+                    
+
+
+
+
+
+
+
+
 
 
 
@@ -60,8 +79,8 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        
-        
+
+
 
     </Grid>
 </Window>
