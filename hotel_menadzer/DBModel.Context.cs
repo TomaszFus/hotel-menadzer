@@ -26,8 +26,10 @@ namespace hotel_menadzer
         }
     
         public virtual DbSet<klienci> klienci { get; set; }
-        public virtual DbSet<pokoje> pokoje { get; set; }
         public virtual DbSet<pracownicy> pracownicy { get; set; }
+        public virtual DbSet<pokoje> pokoje { get; set; }
         public virtual DbSet<rezerwacje> rezerwacje { get; set; }
+
+        
     }
 }

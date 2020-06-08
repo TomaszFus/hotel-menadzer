@@ -9,17 +9,7 @@
     <Property Name="nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="telefon" Type="Int32" Nullable="false" />
     <Property Name="nr_dowodu" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="rezerwacje" Relationship="Self.FK_rezerwacje_klienci" FromRole="klienci" ToRole="rezerwacje" />
-  </EntityType>
-  <EntityType Name="pokoje">
-    <Key>
-      <PropertyRef Name="nr_pokoju" />
-    </Key>
-    <Property Name="nr_pokoju" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="liczba_osob" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="cena" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-    <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="rezerwacje" Relationship="Self.FK_rezerwacje_pokoje" FromRole="pokoje" ToRole="rezerwacje" />
+    <NavigationProperty Name="rezerwacje" Relationship="HotelModel.FK_rezerwacje_klienci" FromRole="klienci" ToRole="rezerwacje" />
   </EntityType>
   <EntityType Name="pracownicy">
     <Key>
@@ -31,6 +21,30 @@
     <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="haslo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
+  <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="klienci" EntityType="Self.klienci" />
+    <EntitySet Name="pracownicy" EntityType="Self.pracownicy" />
+    <EntitySet Name="pokoje" EntityType="HotelModel.pokoje" />
+    <EntitySet Name="rezerwacje" EntityType="HotelModel.rezerwacje" />
+    <AssociationSet Name="FK_rezerwacje_klienci" Association="HotelModel.FK_rezerwacje_klienci">
+      <End Role="klienci" EntitySet="klienci" />
+      <End Role="rezerwacje" EntitySet="rezerwacje" />
+    </AssociationSet>
+    <AssociationSet Name="FK_rezerwacje_pokoje" Association="HotelModel.FK_rezerwacje_pokoje">
+      <End Role="pokoje" EntitySet="pokoje" />
+      <End Role="rezerwacje" EntitySet="rezerwacje" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="pokoje">
+    <Key>
+      <PropertyRef Name="nr_pokoju" />
+    </Key>
+    <Property Name="nr_pokoju" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="liczba_osob" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cena" Type="Double" Nullable="false" />
+    <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="rezerwacje" Relationship="HotelModel.FK_rezerwacje_pokoje" FromRole="pokoje" ToRole="rezerwacje" />
+  </EntityType>
   <EntityType Name="rezerwacje">
     <Key>
       <PropertyRef Name="id_rezerwacji" />
@@ -40,14 +54,14 @@
     <Property Name="do" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="nr_pokoju" Type="Int32" Nullable="false" />
     <Property Name="id_klienta" Type="Int32" Nullable="false" />
-    <Property Name="rodzaj_platnosci" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="koszt" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-    <NavigationProperty Name="klienci" Relationship="Self.FK_rezerwacje_klienci" FromRole="rezerwacje" ToRole="klienci" />
-    <NavigationProperty Name="pokoje" Relationship="Self.FK_rezerwacje_pokoje" FromRole="rezerwacje" ToRole="pokoje" />
+    <Property Name="rodzaj_platnosci" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="koszt" Type="Double" Nullable="false" />
+    <NavigationProperty Name="klienci" Relationship="HotelModel.FK_rezerwacje_klienci" FromRole="rezerwacje" ToRole="klienci" />
+    <NavigationProperty Name="pokoje" Relationship="HotelModel.FK_rezerwacje_pokoje" FromRole="rezerwacje" ToRole="pokoje" />
   </EntityType>
   <Association Name="FK_rezerwacje_klienci">
-    <End Role="klienci" Type="Self.klienci" Multiplicity="1" />
-    <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+    <End Type="HotelModel.klienci" Role="klienci" Multiplicity="1" />
+    <End Type="HotelModel.rezerwacje" Role="rezerwacje" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="klienci">
         <PropertyRef Name="id_klienta" />
@@ -58,8 +72,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_rezerwacje_pokoje">
-    <End Role="pokoje" Type="Self.pokoje" Multiplicity="1" />
-    <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+    <End Type="HotelModel.pokoje" Role="pokoje" Multiplicity="1" />
+    <End Type="HotelModel.rezerwacje" Role="rezerwacje" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="pokoje">
         <PropertyRef Name="nr_pokoju" />
@@ -69,18 +83,4 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="klienci" EntityType="Self.klienci" />
-    <EntitySet Name="pokoje" EntityType="Self.pokoje" />
-    <EntitySet Name="pracownicy" EntityType="Self.pracownicy" />
-    <EntitySet Name="rezerwacje" EntityType="Self.rezerwacje" />
-    <AssociationSet Name="FK_rezerwacje_klienci" Association="Self.FK_rezerwacje_klienci">
-      <End Role="klienci" EntitySet="klienci" />
-      <End Role="rezerwacje" EntitySet="rezerwacje" />
-    </AssociationSet>
-    <AssociationSet Name="FK_rezerwacje_pokoje" Association="Self.FK_rezerwacje_pokoje">
-      <End Role="pokoje" EntitySet="pokoje" />
-      <End Role="rezerwacje" EntitySet="rezerwacje" />
-    </AssociationSet>
-  </EntityContainer>
 </Schema>

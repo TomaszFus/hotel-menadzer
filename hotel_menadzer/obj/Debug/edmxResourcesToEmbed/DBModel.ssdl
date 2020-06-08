@@ -16,7 +16,7 @@
     </Key>
     <Property Name="nr_pokoju" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="liczba_osob" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="cena" Type="money" Nullable="false" />
+    <Property Name="cena" Type="float" Nullable="false" />
     <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="pracownicy">
@@ -39,7 +39,7 @@
     <Property Name="nr_pokoju" Type="int" Nullable="false" />
     <Property Name="id_klienta" Type="int" Nullable="false" />
     <Property Name="rodzaj_platnosci" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="koszt" Type="money" Nullable="false" />
+    <Property Name="koszt" Type="float" Nullable="false" />
   </EntityType>
   <Association Name="FK_rezerwacje_klienci">
     <End Role="klienci" Type="Self.klienci" Multiplicity="1" />

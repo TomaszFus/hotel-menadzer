@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HotelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="klienci">
           <Key>
             <PropertyRef Name="id_klienta" />
@@ -21,7 +21,7 @@
           </Key>
           <Property Name="nr_pokoju" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="liczba_osob" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="cena" Type="money" Nullable="false" />
+          <Property Name="cena" Type="float" Nullable="false" />
           <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="pracownicy">
@@ -44,7 +44,7 @@
           <Property Name="nr_pokoju" Type="int" Nullable="false" />
           <Property Name="id_klienta" Type="int" Nullable="false" />
           <Property Name="rodzaj_platnosci" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="koszt" Type="money" Nullable="false" />
+          <Property Name="koszt" Type="float" Nullable="false" />
         </EntityType>
         <Association Name="FK_rezerwacje_klienci">
           <End Role="klienci" Type="Self.klienci" Multiplicity="1" />
@@ -84,8 +84,7 @@
             <End Role="rezerwacje" EntitySet="rezerwacje" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -98,17 +97,7 @@
           <Property Name="nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="telefon" Type="Int32" Nullable="false" />
           <Property Name="nr_dowodu" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="rezerwacje" Relationship="Self.FK_rezerwacje_klienci" FromRole="klienci" ToRole="rezerwacje" />
-        </EntityType>
-        <EntityType Name="pokoje">
-          <Key>
-            <PropertyRef Name="nr_pokoju" />
-          </Key>
-          <Property Name="nr_pokoju" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="liczba_osob" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="cena" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="rezerwacje" Relationship="Self.FK_rezerwacje_pokoje" FromRole="pokoje" ToRole="rezerwacje" />
+          <NavigationProperty Name="rezerwacje" Relationship="HotelModel.FK_rezerwacje_klienci" FromRole="klienci" ToRole="rezerwacje" />
         </EntityType>
         <EntityType Name="pracownicy">
           <Key>
@@ -120,6 +109,30 @@
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="haslo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
+        <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="klienci" EntityType="Self.klienci" />
+          <EntitySet Name="pracownicy" EntityType="Self.pracownicy" />
+          <EntitySet Name="pokoje" EntityType="HotelModel.pokoje" />
+          <EntitySet Name="rezerwacje" EntityType="HotelModel.rezerwacje" />
+          <AssociationSet Name="FK_rezerwacje_klienci" Association="HotelModel.FK_rezerwacje_klienci">
+            <End Role="klienci" EntitySet="klienci" />
+            <End Role="rezerwacje" EntitySet="rezerwacje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rezerwacje_pokoje" Association="HotelModel.FK_rezerwacje_pokoje">
+            <End Role="pokoje" EntitySet="pokoje" />
+            <End Role="rezerwacje" EntitySet="rezerwacje" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="pokoje">
+          <Key>
+            <PropertyRef Name="nr_pokoju" />
+          </Key>
+          <Property Name="nr_pokoju" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="liczba_osob" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cena" Type="Double" Nullable="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="rezerwacje" Relationship="HotelModel.FK_rezerwacje_pokoje" FromRole="pokoje" ToRole="rezerwacje" />
+        </EntityType>
         <EntityType Name="rezerwacje">
           <Key>
             <PropertyRef Name="id_rezerwacji" />
@@ -129,14 +142,14 @@
           <Property Name="do" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="nr_pokoju" Type="Int32" Nullable="false" />
           <Property Name="id_klienta" Type="Int32" Nullable="false" />
-          <Property Name="rodzaj_platnosci" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="koszt" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
-          <NavigationProperty Name="klienci" Relationship="Self.FK_rezerwacje_klienci" FromRole="rezerwacje" ToRole="klienci" />
-          <NavigationProperty Name="pokoje" Relationship="Self.FK_rezerwacje_pokoje" FromRole="rezerwacje" ToRole="pokoje" />
+          <Property Name="rodzaj_platnosci" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="koszt" Type="Double" Nullable="false" />
+          <NavigationProperty Name="klienci" Relationship="HotelModel.FK_rezerwacje_klienci" FromRole="rezerwacje" ToRole="klienci" />
+          <NavigationProperty Name="pokoje" Relationship="HotelModel.FK_rezerwacje_pokoje" FromRole="rezerwacje" ToRole="pokoje" />
         </EntityType>
         <Association Name="FK_rezerwacje_klienci">
-          <End Role="klienci" Type="Self.klienci" Multiplicity="1" />
-          <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+          <End Type="HotelModel.klienci" Role="klienci" Multiplicity="1" />
+          <End Type="HotelModel.rezerwacje" Role="rezerwacje" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="klienci">
               <PropertyRef Name="id_klienta" />
@@ -147,8 +160,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_rezerwacje_pokoje">
-          <End Role="pokoje" Type="Self.pokoje" Multiplicity="1" />
-          <End Role="rezerwacje" Type="Self.rezerwacje" Multiplicity="*" />
+          <End Type="HotelModel.pokoje" Role="pokoje" Multiplicity="1" />
+          <End Type="HotelModel.rezerwacje" Role="rezerwacje" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="pokoje">
               <PropertyRef Name="nr_pokoju" />
@@ -158,20 +171,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="klienci" EntityType="Self.klienci" />
-          <EntitySet Name="pokoje" EntityType="Self.pokoje" />
-          <EntitySet Name="pracownicy" EntityType="Self.pracownicy" />
-          <EntitySet Name="rezerwacje" EntityType="Self.rezerwacje" />
-          <AssociationSet Name="FK_rezerwacje_klienci" Association="Self.FK_rezerwacje_klienci">
-            <End Role="klienci" EntitySet="klienci" />
-            <End Role="rezerwacje" EntitySet="rezerwacje" />
-          </AssociationSet>
-          <AssociationSet Name="FK_rezerwacje_pokoje" Association="Self.FK_rezerwacje_pokoje">
-            <End Role="pokoje" EntitySet="pokoje" />
-            <End Role="rezerwacje" EntitySet="rezerwacje" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -189,16 +188,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="pokoje">
-            <EntityTypeMapping TypeName="HotelModel.pokoje">
-              <MappingFragment StoreEntitySet="pokoje">
-                <ScalarProperty Name="nr_pokoju" ColumnName="nr_pokoju" />
-                <ScalarProperty Name="liczba_osob" ColumnName="liczba_osob" />
-                <ScalarProperty Name="cena" ColumnName="cena" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="pracownicy">
             <EntityTypeMapping TypeName="HotelModel.pracownicy">
               <MappingFragment StoreEntitySet="pracownicy">
@@ -210,16 +199,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="pokoje">
+            <EntityTypeMapping TypeName="HotelModel.pokoje">
+              <MappingFragment StoreEntitySet="pokoje">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="cena" ColumnName="cena" />
+                <ScalarProperty Name="liczba_osob" ColumnName="liczba_osob" />
+                <ScalarProperty Name="nr_pokoju" ColumnName="nr_pokoju" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="rezerwacje">
             <EntityTypeMapping TypeName="HotelModel.rezerwacje">
               <MappingFragment StoreEntitySet="rezerwacje">
-                <ScalarProperty Name="id_rezerwacji" ColumnName="id_rezerwacji" />
-                <ScalarProperty Name="od" ColumnName="od" />
-                <ScalarProperty Name="do" ColumnName="do" />
-                <ScalarProperty Name="nr_pokoju" ColumnName="nr_pokoju" />
-                <ScalarProperty Name="id_klienta" ColumnName="id_klienta" />
-                <ScalarProperty Name="rodzaj_platnosci" ColumnName="rodzaj_platnosci" />
                 <ScalarProperty Name="koszt" ColumnName="koszt" />
+                <ScalarProperty Name="rodzaj_platnosci" ColumnName="rodzaj_platnosci" />
+                <ScalarProperty Name="id_klienta" ColumnName="id_klienta" />
+                <ScalarProperty Name="nr_pokoju" ColumnName="nr_pokoju" />
+                <ScalarProperty Name="do" ColumnName="do" />
+                <ScalarProperty Name="od" ColumnName="od" />
+                <ScalarProperty Name="id_rezerwacji" ColumnName="id_rezerwacji" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

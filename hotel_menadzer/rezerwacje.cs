@@ -19,9 +19,9 @@ namespace hotel_menadzer
         public System.DateTime @do { get; set; }
         public int nr_pokoju { get; set; }
         public int id_klienta { get; set; }
-        public decimal koszt { get; set; }
         public string rodzaj_platnosci { get; set; }
-
+        public double koszt { get; set; }
+    
         public virtual klienci klienci { get; set; }
         public virtual pokoje pokoje { get; set; }
     }

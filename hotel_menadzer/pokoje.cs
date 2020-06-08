@@ -22,7 +22,7 @@ namespace hotel_menadzer
     
         public int nr_pokoju { get; set; }
         public string liczba_osob { get; set; }
-        public decimal cena { get; set; }
+        public double cena { get; set; }
         public string status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

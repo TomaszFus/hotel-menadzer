@@ -18,15 +18,15 @@
                     <Label Content="Koniec pobytu" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,295,0,0"/>
                     <Label Name="Lb_DataDoBlad" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="188,318,0,0" Width="120" FontSize="11" Foreground="Red" Visibility="Collapsed"/>
                     <Label Content="Liczba dni" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,345,0,0"/>
-                    <Label Content="Liczba osób" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,38,0,0"/>
-                    <Label Content="Pokój" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,88,0,0"/>
-                    <Label Content="Koszt" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,138,0,0"/>
-                    <Label Content="Rodzaj płatności" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,188,0,0"/>
+                    <!-- <Label Content="Liczba osób" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,38,0,0"/> 
+                    <Label Content="Pokój" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="470,88,0,0"/> -->
+                    <Label Content="Koszt" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="474,88,0,0"/>
+                    <Label Content="Rodzaj płatności" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="473,161,0,0"/>
 
-                    <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="188,38,0,0"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="188,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="188,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="188,188,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="TxB_ImieKl" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="188,38,0,0"/>
+                    <TextBox Name="TxB_NazwiskoKl" HorizontalAlignment="Left" Height="23" Margin="188,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="TxB_TelefonKl" HorizontalAlignment="Left" Height="23" Margin="188,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="TxB_NrDowOsKl" HorizontalAlignment="Left" Height="23" Margin="188,188,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <TextBox Name="TxB_DzienOd" HorizontalAlignment="Left" Height="23" Margin="188,245,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="{Binding ElementName=Kalendarz_1, Path=SelectedDate, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox Name="TxB_DzienDo" HorizontalAlignment="Left" Height="23" Margin="188,295,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" IsReadOnly="True" Text="{Binding ElementName=Kalendarz_2, Path=SelectedDate, StringFormat=dd-MM-yyyy, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBox Name="TxB_LiczbaDni" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="188,345,0,0" IsReadOnly="True"/>
@@ -35,21 +35,25 @@
                     <Button Name="Bt_Kalendarz_2" Content="K" HorizontalAlignment="Left" VerticalAlignment="Top" Width="20" Margin="321,295,0,0" Height="23" Click="Bt_Kalendarz_2_Click"/>
                     <Calendar Name="Kalendarz_1" SelectionMode="SingleDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="353,103,0,0" Visibility="Collapsed"  SelectedDatesChanged="Kalendarz_1_SelectedDatesChanged"  />
                     <Calendar Name="Kalendarz_2" SelectionMode="SingleDate" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="353,103,0,0" Visibility="Collapsed"  SelectedDatesChanged="Kalendarz_2_SelectedDatesChanged"  />
-                    <ComboBox Name="ComBox_LiczbaOs" ItemsSource="{Binding pokoje}" DisplayMemberPath="liczba_osob" SelectedValuePath="liczba_osob"   HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="591,38,0,0" RenderTransformOrigin="0.32,0.399" SelectionChanged="ComBox_LiczbaOs_SelectionChanged_1"/>
-                    <ComboBox Name="ComBox_Pokoj" ItemsSource="{Binding pokoje}" DisplayMemberPath="nr_pokoju" SelectedValuePath="nr_pokoju" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="591,88,0,0" SelectionChanged="ComBox_Pokoj_SelectionChanged"/>
-                    <TextBox Name="TxB_Koszt" HorizontalAlignment="Left" Height="23" Margin="591,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-                    <RadioButton Name="RB_Gotowka" Content="Gotówka" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="591,194,0,0" Checked="RB_Gotowka_Checked"/>
-                    <RadioButton Name="RB_Karta" Content="Karta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="591,222,0,0" Checked="RB_Karta_Checked"/>
-                    
-                    <TextBox Name="texttest" HorizontalAlignment="Left" Height="23" Margin="332,191,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <Button Content="Zatwierdź" HorizontalAlignment="Left" Margin="555,303,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Wyczyść" HorizontalAlignment="Left" Margin="555,354,0,0" VerticalAlignment="Top" Width="75"/>
-                    
+                    <!-- <ComboBox Name="ComBox_LiczbaOs" ItemsSource="{Binding pokoje}" DisplayMemberPath="liczba_osob" SelectedValuePath="liczba_osob"   HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="591,38,0,0" RenderTransformOrigin="0.32,0.399"/> 
+                    <ComboBox Name="ComBox_Pokoj" ItemsSource="{Binding pokoje}" DisplayMemberPath="nr_pokoju" SelectedValuePath="nr_pokoju" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="591,88,0,0"/>   -->
+                    <TextBox Name="TxB_Koszt" HorizontalAlignment="Left" Height="23" Margin="537,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <RadioButton Name="RB_Gotowka" Content="Gotówka" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="591,152,0,0" Checked="RB_Gotowka_Checked"/>
+                    <RadioButton Name="RB_Karta" Content="Karta" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="591,188,0,0" Checked="RB_Karta_Checked"/>
+                    <Button Name="Bt_Rejestracja" Content="Zatwierdź" HorizontalAlignment="Left" Margin="547,247,0,0" VerticalAlignment="Top" Width="75" Click="Bt_Rejestracja_Click"/>
+                    <Button Name="Bt_WyczyscRejKl" Content="Wyczyść" HorizontalAlignment="Left" Margin="547,298,0,0" VerticalAlignment="Top" Width="75" Click="Bt_WyczyscRejKl_Click"/>
 
-
-
-
-
+                    <Label Name="Lb_ImieBlad" Content="" HorizontalAlignment="Left" Margin="188,61,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+                    <Label Name="Lb_NazwiskoBlad" Content="" HorizontalAlignment="Left" Margin="188,111,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+                    <Label Name="Lb_TelBlad" Content="" HorizontalAlignment="Left" Margin="188,161,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+                    <Label Name="Lb_NrDowBlad" Content="" HorizontalAlignment="Left" Margin="188,211,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+                    <Label Name="Lb_PobytPoczatekBlad" Content="" HorizontalAlignment="Left" Margin="188,269,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+                    <Label Name="Lb_LIczbaOsBlad" Content="" HorizontalAlignment="Left" Margin="591,60,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+                    <Label Name="Lb_NrPokojuBlad" Content="" HorizontalAlignment="Left" Margin="591,110,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+                    <Label Name="Lb_PlatnoscBlad" Content="" HorizontalAlignment="Left" Margin="592,250,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+                    <TextBox Name="TxB_Pokoj" HorizontalAlignment="Left" Height="23" Margin="537,38,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <Label Content="Pokój" HorizontalAlignment="Left" Margin="473,35,0,0" VerticalAlignment="Top"/>
+                    <Button Name="Bt_Koszt" Content="Button" HorizontalAlignment="Left" Margin="671,38,0,0" VerticalAlignment="Top" Width="50" Click="Bt_Koszt_Click"/>
 
 
 
@@ -73,14 +77,58 @@
                             <DataGridTextColumn Binding="{Binding status}" Header="Status"/>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <TextBox Name="TxB_NP_LO" HorizontalAlignment="Left" Height="23" Margin="431,135,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="TxB_NP_Cena" HorizontalAlignment="Left" Height="23" Margin="431,187,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox Name="TxB_NP_Nr" HorizontalAlignment="Left" Height="23" Margin="431,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <Label Content="Nr. pokoju" HorizontalAlignment="Left" Margin="335,83,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Liczba osób" HorizontalAlignment="Left" Margin="335,135,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Cena" HorizontalAlignment="Left" Margin="335,187,0,0" VerticalAlignment="Top" />
+                    <Label Content="Nowy pokój" HorizontalAlignment="Left" Margin="407,26,0,0" VerticalAlignment="Top"/>
+                    <Button Name="Bt_NowyPokoj" Content="Dodaj" HorizontalAlignment="Left" Margin="407,238,0,0" VerticalAlignment="Top" Width="75" Click="Bt_NowyPokoj_Click"/>
+                    <Label Name="Lb_NP_error1" Content="Label" HorizontalAlignment="Left" Margin="431,106,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+                    <Label Name="Lb_NP_error2" Content="Label" HorizontalAlignment="Left" Margin="431,158,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+                    <Label Name="Lb_NP_error3" Content="Label" HorizontalAlignment="Left" Margin="431,210,0,0" VerticalAlignment="Top" Foreground="Red" Visibility="Collapsed"/>
+
 
 
 
                 </Grid>
             </TabItem>
+
+            <TabItem Header="Wynajęcia">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid Name="DataGridW" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="371" Width="560" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding id_rezerwacji}" Header="Id rezerwacji"/>
+                            <DataGridTextColumn Binding="{Binding od}" Header="Poczatek pobytu"/>
+                            <DataGridTextColumn Binding="{Binding do}" Header="Koniec pobytu"/>
+                            <DataGridTextColumn Binding="{Binding nr_pokoju}" Header="Pokoj"/>
+                            <DataGridTextColumn Binding="{Binding id_klienta}" Header="Klient"/>
+                            <DataGridTextColumn Binding="{Binding rodzaj_platnosci}" Header="Rodzaj płatności"/>
+                            <DataGridTextColumn Binding="{Binding koszt}" Header="Koszt"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Name="Bt_ZakonczPobyt" Content="Button" HorizontalAlignment="Left" Margin="624,132,0,0" VerticalAlignment="Top" Width="75" Click="Bt_ZakonczPobyt_Click"/>
+                </Grid>
+
+            </TabItem>
+
+
+            <TabItem Header="Klienci">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid Name="DataGridK" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="371" Width="560" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding id_klienta}" Header="Id"/>
+                            <DataGridTextColumn Binding="{Binding imie}" Header="Imię"/>
+                            <DataGridTextColumn Binding="{Binding nazwisko}" Header="Nazwisko"/>
+                            <DataGridTextColumn Binding="{Binding telefon}" Header="Telefon"/>
+                            <DataGridTextColumn Binding="{Binding nr_dowodu}" Header="Nr dowodu"/>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+
         </TabControl>
-
-
-
     </Grid>
 </Window>
