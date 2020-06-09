@@ -19,10 +19,21 @@ namespace hotel_menadzer
         {
             this.rezerwacje = new HashSet<rezerwacje>();
         }
-    
+        /// <summary>
+        /// Przechowuje nmer pokoju
+        /// </summary>
         public int nr_pokoju { get; set; }
+        /// <summary>
+        /// Przechowuje wielkosc pokoju
+        /// </summary>
         public string liczba_osob { get; set; }
+        /// <summary>
+        /// Przechowuje cene pokoj
+        /// </summary>
         public double cena { get; set; }
+        /// <summary>
+        /// Przechowuje status pokoju, wolny lub zajety
+        /// </summary>
         public string status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -14,12 +14,30 @@ namespace hotel_menadzer
     
     public partial class pracownicy
     {
+        /// <summary>
+        /// Przechowuje id pracownika
+        /// </summary>
         public int id_pracownika { get; set; }
+        /// <summary>
+        /// Przechowuje imie pracownika
+        /// </summary>
         public string imie { get; set; }
+        /// <summary>
+        /// Przechowuje nazwisko pracownika
+        /// </summary>
         public string nazwisko { get; set; }
+        /// <summary>
+        /// Przechowuje login pracownika
+        /// </summary>
         public string login { get; set; }
+        /// <summary>
+        /// Przechowuje haslo pracownika
+        /// </summary>
         public string haslo { get; set; }
 
+        /// <summary>
+        /// Metoda tworz¹ca login pracownika, poprzez polaczenei pierwszej litery imienia i nazwiska
+        /// </summary>
         public void Login()
         {
             login = imie.Substring(0, 1).ToLower() + nazwisko.ToLower();

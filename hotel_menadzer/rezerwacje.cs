@@ -14,12 +14,33 @@ namespace hotel_menadzer
     
     public partial class rezerwacje
     {
+        /// <summary>
+        /// Przechowuje id rezerwacji
+        /// </summary>
         public int id_rezerwacji { get; set; }
+        /// <summary>
+        /// Przechowuje date poczatku pobytu
+        /// </summary>
         public System.DateTime od { get; set; }
+        /// <summary>
+        /// Przechowuje date konca pobytu
+        /// </summary>
         public System.DateTime @do { get; set; }
+        /// <summary>
+        /// Przechowuje numer pokoju 
+        /// </summary>
         public int nr_pokoju { get; set; }
+        /// <summary>
+        /// Przechowuje id klienta 
+        /// </summary>
         public int id_klienta { get; set; }
+        /// <summary>
+        /// Przechowuje rodzaj platnosci
+        /// </summary>
         public string rodzaj_platnosci { get; set; }
+        /// <summary>
+        /// Przechowuje koszt wynajecia pokoju
+        /// </summary>
         public double koszt { get; set; }
     
         public virtual klienci klienci { get; set; }

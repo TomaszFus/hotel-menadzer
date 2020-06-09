@@ -25,7 +25,9 @@ namespace hotel_menadzer
         }
 
         
-
+        /// <summary>
+        /// Zdarzenie obsługujące stworzenie konta nowego pracownika
+        /// </summary>
         private void Bt_NPr_Click(object sender, RoutedEventArgs e)
         {
             NowyPracownik Win_NPr = new NowyPracownik();
@@ -33,9 +35,12 @@ namespace hotel_menadzer
         }
 
 
-        
 
-        
+
+
+        /// <summary>
+        /// Zdarzenie obsługujące logowanie pracownika do systemu
+        /// </summary>
 
         private void Bt_Zaloguj_Click(object sender, RoutedEventArgs e)
         {

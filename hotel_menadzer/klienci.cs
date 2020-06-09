@@ -19,11 +19,25 @@ namespace hotel_menadzer
         {
             this.rezerwacje = new HashSet<rezerwacje>();
         }
-    
+        /// <summary>
+        /// Przechowuje id klienta 
+        /// </summary>
         public int id_klienta { get; set; }
+        /// <summary>
+        /// Przechowuje imie klienta
+        /// </summary>
         public string imie { get; set; }
+        /// <summary>
+        /// Przechowuje nazwisko klienta
+        /// </summary>
         public string nazwisko { get; set; }
+        /// <summary>
+        /// Przechowuje numer telefonu klienta
+        /// </summary>
         public int telefon { get; set; }
+        /// <summary>
+        /// Przechowuje numer dowodu klienta
+        /// </summary>
         public int nr_dowodu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

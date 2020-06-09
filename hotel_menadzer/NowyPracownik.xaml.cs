@@ -21,7 +21,9 @@ namespace hotel_menadzer
     {
         pracownicy ObPracownik = new pracownicy(); //obeikt clasy pracownicy z DBModel
 
-        
+        /// <summary>
+        /// Metoda czyszcząca pola tworzenia konta pracownika
+        /// </summary>
         void Wyczysc()
         {
             TxB_ImiePr.Text = TxB_NazwiskoPr.Text=TxB_Login.Text=PassB_Kod.Password=PassB_Haslo.Password=PassB_PowHaslo.Password="";
@@ -87,7 +89,10 @@ namespace hotel_menadzer
 
             
         
-
+        /// <summary>
+        /// Zdarzenie obsługujące tworzenie konta pracownika
+        /// </summary>
+        
         private void Bt_Utworz_Click(object sender, RoutedEventArgs e)
         {
 
@@ -171,6 +176,7 @@ namespace hotel_menadzer
                 MessageBox.Show("Popraw dane");
             }
         }
+
 
         private void Bt_Anuluj_Click(object sender, RoutedEventArgs e)
         {

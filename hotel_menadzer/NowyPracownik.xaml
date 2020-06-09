@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hotel_menadzer"
         mc:Ignorable="d"
-        Title="NowyPracownik" Height="418.733" Width="945.53">
+        Title="Tworzenie konta pracownika" Height="418.733" Width="945.53" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Grid>
 
         <Label Content="Tworzenie Konta Pracownika" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0"/>

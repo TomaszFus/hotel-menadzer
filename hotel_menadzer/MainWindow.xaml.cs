@@ -62,7 +62,10 @@ namespace hotel_menadzer
 
 
 
-
+        /// <summary>
+        ///metoda obsługująca wybranie daty początku pobytu 
+        /// </summary>
+        
         private void Kalendarz_1_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             // ... Get reference.
@@ -78,6 +81,10 @@ namespace hotel_menadzer
                 poczatek = date;
             }
         }
+
+        /// <summary>
+        /// metoda obsługująca wybranie daty końca pobytu. Liczba dni pobytu jest uzyskiwana z różnicy między datami.
+        /// </summary>
 
         private void Kalendarz_2_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -115,31 +122,34 @@ namespace hotel_menadzer
             }
         }
 
+        /// <summary>
+        /// Otwiera kalendarz umożliwiający wybór daty
+        /// </summary>
+        
         private void Bt_Kalendarz_Click(object sender, RoutedEventArgs e)
         {
             Kalendarz_1.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Otwiera kalendarz umożliwiający wybór daty
+        /// </summary>
+        
         private void Bt_Kalendarz_2_Click(object sender, RoutedEventArgs e)
         {
             Kalendarz_2.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Obsługa zdarzenia załadowania okna
+        /// </summary>
+        
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             PokojeGrid();
             RezerwacjeGrid();
             KlienciGrid();
-            using (HotelEntities db=new HotelEntities())
-            {
-                // DataGridP.ItemsSource = db.pokoje.ToList(); //datagrid w zakładce pokoje
-                // DataGridW.ItemsSource = db.rezerwacje.ToList(); //data grig w zakaladce wynajecia
-                
-                //combobox liczba osob
-                //ComBox_LiczbaOs.ItemsSource = db.pokoje.Where(s => s.status == "wolny").GroupBy(s=>s.liczba_osob).ToList(); //zmienić
-            
-            }
-            
+                        
             
         }
         //!!!!!!!!!!!!!!!!!!!!!!
@@ -174,38 +184,40 @@ namespace hotel_menadzer
 
         //}
 
-        private void RB_Gotowka_Checked(object sender, RoutedEventArgs e)
-        {
-            rezerwacja.rodzaj_platnosci = "gotowka";
-        }
-
-        private void RB_Karta_Checked(object sender, RoutedEventArgs e)
-        {
-            rezerwacja.rodzaj_platnosci = "karta";
-        }
-
+        
+        /// <summary>
+        /// Obsługa zdarzenia rejestracji klienta
+        /// </summary>
+        
         private void Bt_Rejestracja_Click(object sender, RoutedEventArgs e)
         {
             Rejestracja();
-            Wyczysc();
+            //Wyczysc();
             PokojeGrid();
             RezerwacjeGrid();
             KlienciGrid();
 
 
         }
-
+        /// <summary>
+        /// Obsługa zdarzenia obliczenia kosztu pobytu
+        /// </summary>
         private void Bt_Koszt_Click(object sender, RoutedEventArgs e)
         {
             Koszt();
         }
+        /// <summary>
+        /// Obsługa zdarzenia wyczyszczenia pół rejestracji klienta
+        /// </summary>
 
         private void Bt_WyczyscRejKl_Click(object sender, RoutedEventArgs e)
         {
             Wyczysc();
         }
 
-
+        /// <summary>
+        /// Obsługa zdarzenia dodania nowego pokoju
+        /// </summary>
         private void Bt_NowyPokoj_Click(object sender, RoutedEventArgs e)
         {
             NowyPokoj();
@@ -213,36 +225,50 @@ namespace hotel_menadzer
         }
 
 
-
+        /// <summary>
+        /// Metoda rejestrujaca pobyt. Dodaje klienta.
+        /// </summary>
         public void Rejestracja()
         {
+            bool imieOk = false;
+            bool nazwOk = false;
+            bool telOk = false;
+            bool nrDowOk = false;
+            bool metodaPlatOk = false;
+
+
             //przypisanie danych klienta
             if (String.IsNullOrWhiteSpace(TxB_ImieKl.Text))
             {
                 Lb_ImieBlad.Content = "Podaj imie";
                 Lb_ImieBlad.Visibility = Visibility.Visible;
+                imieOk = false;
             }
             else
             {
                 Lb_ImieBlad.Visibility = Visibility.Collapsed;
                 Klient.imie = TxB_ImieKl.Text;
+                imieOk = true;
             }
 
             if (String.IsNullOrWhiteSpace(TxB_NazwiskoKl.Text))
             {
                 Lb_NazwiskoBlad.Content = "Podaj nazwisko";
                 Lb_NazwiskoBlad.Visibility = Visibility.Visible;
+                nazwOk = false;
             }
             else
             {
                 Lb_NazwiskoBlad.Visibility = Visibility.Collapsed;
                 Klient.nazwisko = TxB_NazwiskoKl.Text;
+                nazwOk = true;
             }
 
             if (String.IsNullOrWhiteSpace(TxB_TelefonKl.Text))
             {
                 Lb_TelBlad.Content = "Podaj telefon";
                 Lb_TelBlad.Visibility = Visibility.Visible;
+                telOk = false;
             }
             else
             {
@@ -251,21 +277,25 @@ namespace hotel_menadzer
                 {
                     Lb_TelBlad.Visibility = Visibility.Collapsed;
                     Klient.telefon = int.Parse(TxB_TelefonKl.Text);
+                    telOk = true;
                 }
                 catch (Exception ex)
                 {
                     Lb_TelBlad.Content=ex.Message;
                     Lb_TelBlad.Visibility = Visibility.Visible;
+                    telOk = false;
                     //throw;
                 }
                 
             }
 
 
-            if (String.IsNullOrWhiteSpace(TxB_TelefonKl.Text))
+            if (String.IsNullOrWhiteSpace(TxB_NrDowOsKl.Text))
             {
                 Lb_NrDowBlad.Content = "Podaj nr dowodu";
                 Lb_NrDowBlad.Visibility = Visibility.Visible;
+                nrDowOk = false;
+
             }
             else
             {
@@ -274,14 +304,38 @@ namespace hotel_menadzer
                 {
                     Lb_NrDowBlad.Visibility = Visibility.Collapsed;
                     Klient.nr_dowodu = int.Parse(TxB_NrDowOsKl.Text);
+                    nrDowOk = true;
                 }
                 catch (Exception ex)
                 {
                     Lb_NrDowBlad.Content = ex.Message;
                     Lb_NrDowBlad.Visibility = Visibility.Visible;
+                    nrDowOk = false;
                     //throw;
                 }
 
+            }
+
+
+
+            if(RB_Gotowka.IsChecked==true)
+            {
+                Lb_PlatnoscBlad.Visibility = Visibility.Collapsed;
+                rezerwacja.rodzaj_platnosci = "gotowka";
+                metodaPlatOk = true;
+
+            }
+            else if(RB_Karta.IsChecked==true)
+            {
+                Lb_PlatnoscBlad.Visibility = Visibility.Collapsed;
+                rezerwacja.rodzaj_platnosci = "karta";
+                metodaPlatOk = true;
+            }
+            else
+            {
+                Lb_PlatnoscBlad.Content = "Dokonaj wyboru";
+                Lb_PlatnoscBlad.Visibility = Visibility.Visible;
+                metodaPlatOk = false;
             }
 
 
@@ -301,43 +355,64 @@ namespace hotel_menadzer
             rezerwacja.koszt = _koszt;
             pokoj.status = "zajety";
 
-
-            try
+            if (imieOk && nazwOk && telOk && nrDowOk && metodaPlatOk == true)
             {
-                using (HotelEntities db = new HotelEntities())
+
+                try
                 {
-                    db.klienci.Add(Klient);
-                    db.rezerwacje.Add(rezerwacja);
-                    db.pokoje.AddOrUpdate(pokoj);
-                    db.SaveChanges();
-                    
+                    using (HotelEntities db = new HotelEntities())
+                    {
+                        db.klienci.Add(Klient);
+                        db.rezerwacje.Add(rezerwacja);
+                        db.pokoje.AddOrUpdate(pokoj);
+                        db.SaveChanges();
+
+                    }
+                    Wyczysc();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Uzupełnij dane");
+                    //throw;
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                //throw;
-            }
-
             
 
         }
 
         
-        
+        /// <summary>
+        /// Metoda obliczająca koszt pobytu
+        /// </summary>
         public void Koszt()
         {
-            string nr_p_str = TxB_Pokoj.Text;
-            int nr_p_int = int.Parse(nr_p_str);
+            string nr_p_str=null;
+            int nr_p_int = 0;
+            try
+            {
+                Lb_NrPokojuBlad.Visibility = Visibility.Collapsed;
+                nr_p_str = TxB_Pokoj.Text;
+                nr_p_int = int.Parse(nr_p_str);
+            }
+            catch (Exception)
+            {
+                Lb_NrPokojuBlad.Content = "Podaj numer pokoju";
+                Lb_NrPokojuBlad.Visibility = Visibility.Visible;
+                //throw;
+            }
+            
+            
             using (HotelEntities db = new HotelEntities())
             {
                 try
-                { 
+                {
+                    Lb_NrPokojuBlad.Visibility = Visibility.Collapsed;
                     pokoj = db.pokoje.FirstOrDefault(p => p.nr_pokoju == nr_p_int);
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Nie ma takiego pokoju");
+                    Lb_NrPokojuBlad.Content = "Nie ma takiego pokoju";
+                    Lb_NrPokojuBlad.Visibility = Visibility.Visible;
                     //throw;
                 }
 
@@ -345,16 +420,19 @@ namespace hotel_menadzer
             }
             if (pokoj==null)
             {
-                MessageBox.Show("Nie ma takiego pokoju");
+                Lb_NrPokojuBlad.Content = "Nie ma takiego pokoju";
+                Lb_NrPokojuBlad.Visibility = Visibility.Visible;
             }
             else
             {
                 if (pokoj.status=="zajety")
                 {
-                    MessageBox.Show("Pokój zajęty");
+                    Lb_NrPokojuBlad.Content = "Pokój zajęty";
+                    Lb_NrPokojuBlad.Visibility = Visibility.Visible;
                 }
                 else
                 {
+                    Lb_NrPokojuBlad.Visibility = Visibility.Collapsed;
                     string lDni_str = lDni.Days.ToString();
                     _koszt = pokoj.cena * int.Parse(lDni_str);
                     TxB_Koszt.Text = _koszt.ToString();
@@ -366,7 +444,9 @@ namespace hotel_menadzer
             
         }
         
-        
+        /// <summary>
+        /// Metoda czyszcząca pola pola rejestracji pobytu i klienta
+        /// </summary>
         public void Wyczysc()
         {
             TxB_ImieKl.Text = TxB_NazwiskoKl.Text = TxB_TelefonKl.Text = TxB_NrDowOsKl.Text = TxB_DzienOd.Text = TxB_DzienDo.Text = TxB_LiczbaDni.Text = TxB_Koszt.Text = TxB_Pokoj.Text = null;
@@ -386,7 +466,9 @@ namespace hotel_menadzer
             KlienciGrid();
         }
 
-
+        /// <summary>
+        /// Metoda wyślietlająca pokooje w zakładce pokoje
+        /// </summary>
         public void PokojeGrid()
         {
             using (HotelEntities db = new HotelEntities())
@@ -396,6 +478,9 @@ namespace hotel_menadzer
             }
         }
 
+        /// <summary>
+        /// Metoda wyślietlająca rezerwacje w zakładce rezerwacje
+        /// </summary>
         public void RezerwacjeGrid()
         {
             using (HotelEntities db = new HotelEntities())
@@ -407,7 +492,9 @@ namespace hotel_menadzer
             }
         }
 
-
+        /// <summary>
+        /// Metoda wyślietlająca klientów w zakładce klienci
+        /// </summary>
         public void KlienciGrid()
         {
             using (HotelEntities db = new HotelEntities())
@@ -419,6 +506,9 @@ namespace hotel_menadzer
             }
         }
 
+        /// <summary>
+        /// Metoda dodająca nowy pokój
+        /// </summary>
         public void NowyPokoj()
         {
             bool LOsobOK = false;
@@ -490,6 +580,10 @@ namespace hotel_menadzer
             }
         }
 
+
+        /// <summary>
+        /// Metoda kończąca pobyt
+        /// </summary>
         public void ZakonczPobyt()
         {
             rezerwacja = (rezerwacje)DataGridW.SelectedItem;
@@ -510,6 +604,7 @@ namespace hotel_menadzer
                             }
                             db.klienci.Remove(Klient);
                             pokoj.status = "wolny";
+                            MessageBox.Show("Następuje płątność");
                         }
                         db.SaveChanges();
                     }
@@ -523,6 +618,64 @@ namespace hotel_menadzer
             
         }
 
-        
+        private void DataGridP_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(DataGridP.SelectedIndex>=0)
+            {
+                Bt_AktPok.IsEnabled = true;
+                Bt_NowyPokoj.IsEnabled = false;
+                pokoj = (pokoje)DataGridP.SelectedItem;
+                TxB_NP_Nr.Text = pokoj.nr_pokoju.ToString();
+                TxB_NP_LO.Text = pokoj.liczba_osob;
+                TxB_NP_Cena.Text = pokoj.cena.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Metoda aktualiujaca dane pokoju
+        /// </summary>
+        public void AktualizujPokoj()
+        {
+            pokoj.nr_pokoju= int.Parse(TxB_NP_Nr.Text);
+            
+            using (HotelEntities db=new HotelEntities())
+            {
+                var doAktualizacji = db.pokoje.SingleOrDefault(i => i.nr_pokoju == pokoj.nr_pokoju);
+                if(doAktualizacji!=null && doAktualizacji.status=="wolny")
+                {
+                    doAktualizacji.liczba_osob= TxB_NP_LO.Text;
+                    doAktualizacji.cena= double.Parse(TxB_NP_Cena.Text);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Nie można aktualizować");
+                }
+                
+            }
+        }
+
+
+        public void WyczyscPok()
+        {
+            TxB_NP_Nr.Text = TxB_NP_LO.Text = TxB_NP_Cena.Text = null;
+            //pokoj.liczba_osob = TxB_NP_LO.Text;
+            //pokoj.cena = double.Parse(TxB_NP_Cena.Text);
+        }
+
+        private void Bt_AktPok_Click(object sender, RoutedEventArgs e)
+        {
+            AktualizujPokoj();
+            PokojeGrid();
+            WyczyscPok();
+        }
+
+        private void Bt_WyczyscPok_Click(object sender, RoutedEventArgs e)
+        {
+            WyczyscPok();
+            Bt_AktPok.IsEnabled = false;
+            Bt_NowyPokoj.IsEnabled = true;
+
+        }
     }
 }
