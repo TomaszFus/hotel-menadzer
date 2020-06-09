@@ -168,6 +168,7 @@ namespace hotel_menadzer
                 {
                     db.pracownicy.Add(ObPracownik);
                     db.SaveChanges();
+                    MessageBox.Show("Poprawnie utworzono konto");
                 }
                 Wyczysc();
             }

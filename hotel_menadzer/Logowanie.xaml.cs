@@ -64,7 +64,7 @@ namespace hotel_menadzer
                     if (pracownik.haslo==PassB_Haslo.Password)
                     {
                         LbHaloBlad.Visibility = Visibility.Hidden;
-                        MessageBox.Show("Zalogowano poprawnie");
+                        //MessageBox.Show("Zalogowano poprawnie");
                         
                         MainWindow mainWindow = new MainWindow();
                         mainWindow.Show();
